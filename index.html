@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./file.css">
+</head>
+<body>
+    <h1> JAVASCRIPT CLOSURES</h1>
+    <h2>1. COUNTER</h2>
+    <div>
+        <pre>
+            function counter(){
+                var counter = 0;
+                function IncreaseCounter() {
+                console.log(counter += 1);
+                
+                }
+                return IncreaseCounter;
+               }
+               var counter = counter();
+               counter();
+               counter();
+               counter();
+               counter();
+        </pre>
+        </div>
+        
+            <h2>OUTPUT</h2>
+            <hr>
+            <div>
+            
+            <p> 1<br>2<br>3<br>4</p>
+            </div>
+            <p>Explaination:-- A closure is a function having access to the parent scope,<br>
+                 even after the parent function has closed. here the function IncreaseCounter has acces to the parent variable <br>
+                and the variable is protected by the parent function and only the IncreaseCounter function can make changes to that counter varaible<br>
+            the selfinvoking function IncreaseCounter function reset the value of counter each time its called  </p>
+        
+
+        <h2>2.gues sthe OUTPUT</h2>
+        <div>
+            <pre>
+                let count = 0;
+                (function () {
+                 if (count === 0) {
+                 let count = 1;
+                 console.log(count); // What is logged?
+                 }
+                 console.log(count); // What is logged?
+                })();
+            </pre>
+        </div>
+        
+        <h2>OUTPUT</h2>
+        
+        <hr>
+        <div>
+        <p>1<br>0</p>
+        </div>
+        <p>explaination:-- the function has acces to the scope above and validate the condition and print the ouput accordingly<br>
+        and line by line the code is executed then the last gets exceuted anad prints the 0 which is not changed </p>
+        <h2> 3. asynchronous functions</h2>
+        <div>
+            <pre>
+                for (var i = 0; i < 3; i++) {
+                    console.log(i)
+                    setTimeout(function log() {
+                    console.log(i); // What is logged?
+                    }, 1000);
+                   }
+            </pre>
+        </div>
+        <h2>OUTPUT</h2>
+        <div>0<br>1<br>2<br>3<br>3<br>3</div>
+        <p> Explaination:- the asynchronous function thta is setTimeout function is set to work after a 1000 milli seconds until then<br>
+        the other code get executed in the above code for loop is executed first and then when the condition fails the set time out<br>
+         function is executed and prints the updated value of the i </p>
+        <h2>4. Write a code to calculate area of a rectangle using inner function. In this case outer function should <br>
+            accept parameter length and inner function should accept parameter
+            breadth.
+            </h2>
+        <div>
+            <pre>
+                function length(l){
+    
+                    function breadth(b) {
+                    console.log(l*b);
+                    }
+                    breadth(5);
+                   }
+                   var length = length(2);
+            </pre>
+        </div>
+        <h2>.OUTPUT</h2>
+        <hr>
+        <div>10</div>
+        <p>explaination:- here the inner function has acces to the parameter passed to the outer function  and return the value </p>
+        <h2> 5. Take a variable in outer function and create an inner function to increase the counter every time it is called</h2>
+        <div>
+            <pre>
+                function counter(){
+                    var counter=0;
+                    function increasecounter() {
+                    console.log(counter+=1);
+                    }
+                   return increasecounter;
+                   }
+                   var counter = counter();
+                 counter();
+                 counter();
+                 counter();
+                 counter();
+                 counter(); 
+                
+            </pre>
+        </div>
+        <h2>OUTPUT</h2>
+        <HR>
+            <div>1<br>2<br>3<br>4<br>5</div>
+            <p> explaination:-- A closure is a function having access to the parent scope,<br>
+                even after the parent function has closed. here the function IncreaseCounter has acces to the parent variable <br>
+               and the variable is protected by the parent function and only the IncreaseCounter function can make changes to that counter varaible<br>
+           the selfinvoking function IncreaseCounter function reset the value of counter each time its called  </p>
+
+             <h2>6. print the output</h2>
+               <div>
+                <pre>
+                    var a = 12;
+                    (function () {
+                     console.log (a);
+                    })();
+                    
+                </pre>
+               </div>
+               <h2>output</h2>
+               <hr>
+               <div>12</div>
+               <p>explaination :- closure function has access to the above scope so therefore it prints 12 as a output</p>
+                 <hr>
+                 <h2>7.print teh output</h2>
+                   <div>
+                    <pre>
+                        var a = 10;
+                        var x = (function () {
+                         var a = 12;
+                         return function () {
+                         alert(a);
+                         };
+                        })();
+                        x();
+                        
+                    </pre>
+                   </div> 
+                   <h2>output</h2>
+                   <hr>
+                   <div>12</div>
+                   <p> the output we get is 12 due to access to the parent scope</p>
+<h2> 8. guess the output</h2>
+<div>
+    <pre>
+        var globalVar = "xyz";
+        (function outerFunc(outerArg) {
+         var outerVar = 'a';
+        
+         (function innerFunc(innerArg) {
+         var innerVar = 'b';
+        
+         console.log(
+         "outerArg = " + outerArg + "\n" +
+         "innerArg = " + innerArg + "\n" +
+         "outerVar = " + outerVar + "\n" +
+         "innerVar = " + innerVar + "\n" +
+         "globalVar = " + globalVar);
+        
+         })(456);
+        })(123)
+    </pre>
+</div>
+<h2>output</h2>
+<hr>
+<div>outerArg = 123<br>
+    innerArg = 456<br>
+    outerVar = a<br>
+    innerVar = b<br>
+    globalVar = xyz</div>
+
+    
+
+</body>
+</html>
